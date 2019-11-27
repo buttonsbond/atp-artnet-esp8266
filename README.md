@@ -35,5 +35,8 @@ ESPAsyncTCP - https://github.com/me-no-dev/ESPAsyncTCP the webserver above also 
 <b>Built in effects<b>
 
 McLighting, and some from tweaking4all.com
+https://www.tweaking4all.com/hardware/arduino/adruino-led-strip-effects/
+https://www.tweaking4all.com/forums/topic/led-matrix-with-ws2812b-led-stripes-project/
+
 
 this document is unfinished!
