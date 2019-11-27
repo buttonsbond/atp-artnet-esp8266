@@ -61,4 +61,9 @@ https://www.tweaking4all.com/hardware/arduino/adruino-led-strip-effects/
 https://www.tweaking4all.com/forums/topic/led-matrix-with-ws2812b-led-stripes-project/
 
 
+<h2>Current Issues</h2>
+
+Whenever I set the effects on startup to off - the ESP8266 dumps its stack - not sure exactly why. I thought it was to do
+with incomplete web requests so I added in a few delays before restarting the sketch after a save. If anyone has a fix?
+
 this document is unfinished!
