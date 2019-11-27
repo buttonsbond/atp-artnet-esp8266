@@ -9,7 +9,7 @@ well as a clock pin. I had all sorts of issues getting it to work, most likely b
 was not that great (still not that great by the way!), in the end I found a version of McLighting that worked and so made
 do with that for Christmas of that year.
 
-This year, well, I wanted to get some more pixels (bought one more set of WS2801, and 2 sets of WS2811) and use xLights to
+This year, well, I wanted to get some more pixels (bought one more set of WS2801 to make up 100 string, and 2 sets of WS2811 another 100 string) and use xLights to
 control them. I found a library which is included in this project (all sources at foot of this read me) which could listen for
 Artnet/DMX packets, basically the R,G and B values for each node, and managed to cobble something together which, well,
 worked. I wasn't happy enough with that though, as I won't be running an xLight show all the time, I'd like to be able to
@@ -29,7 +29,7 @@ the various .ino files in it as well as a data folder.
 You may optionally need to install the tool for uploading Sketch data - find instructions here:
     https://github.com/esp8266/arduino-esp8266fs-plugin
 
-Open the main sketch (currently called XXXXX). If you've installed the above tool ok, from the tools menu you'll have
+Open the main sketch (currently called xmas-artnet-ws2811.ino). If you've installed the above tool ok, from the tools menu you'll have
 the option to upload the sketch data - this is the web interface and config file.
 
 You may need to make a few changes in the settings.h file, there are comments in there to help you. Most likely you will
@@ -58,17 +58,25 @@ some SPIFF storage on your ESP8266.
 <h3>Built in effects</h3>
 
 <ul>
-    <li>McLighting, and some from tweaking4all.com
+    <li>McLighting
+    <li>tweaking4all.com
         <ul>
 <li>https://www.tweaking4all.com/hardware/arduino/adruino-led-strip-effects/
 <li>https://www.tweaking4all.com/forums/topic/led-matrix-with-ws2812b-led-stripes-project/
         </ul>
 </ul>
 
-
 <h2>Current Issues</h2>
 
-Whenever I set the effects on startup to off - the ESP8266 dumps its stack - not sure exactly why. I thought it was to do
+Sometimes when settings are changed - the ESP8266 dumps its stack - not sure exactly why. I thought it was to do
 with incomplete web requests so I added in a few delays before restarting the sketch after a save. If anyone has a fix?
 
-this document is unfinished!
+<h2>To be done</h2>
+<ul>
+    <li>Add MQTT support so can be used with Home Assistant and Node Red
+    <li>Fix bugs
+    <li>Tidy up code a bit
+    <li>Maybe add some more comments
+    <li>More built in effects
+    <li>Add ability to save a Artnet/DMX sequence and load to play - not sure if this will be feasible depending on what I can get the file size down to
+</ul>
