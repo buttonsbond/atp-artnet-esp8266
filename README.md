@@ -62,7 +62,6 @@ some SPIFF storage on your ESP8266.
     <li>tweaking4all.com
         <ul>
 <li>https://www.tweaking4all.com/hardware/arduino/adruino-led-strip-effects/
-<li>https://www.tweaking4all.com/forums/topic/led-matrix-with-ws2812b-led-stripes-project/
         </ul>
 </ul>
 
