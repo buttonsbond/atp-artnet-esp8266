@@ -48,17 +48,22 @@ some SPIFF storage on your ESP8266.
 
 <h2>Sources</h2>
 
-ESPAsyncWebserver - https://github.com/me-no-dev/ESPAsyncWebServer I don't recall the reason I opted for using this particular. You'll need to download this and place in your libraries folder.
-  library, most likely the result of various searches for webserver examples. Anyway, seems fairly easy to use.
-ESPAsyncTCP - https://github.com/me-no-dev/ESPAsyncTCP the webserver above also needed this. You'll need to download this.
-FastLED - https://github.com/FastLED/FastLED - I think you can add the library via. the libraries manager.
-Artnet Sender/Receiver - https://github.com/hideakitai/ArtNet - I think you can add the library via. the libraries manager.
+<ul>
+    <li>ESPAsyncWebserver - https://github.com/me-no-dev/ESPAsyncWebServer I don't recall the reason I opted for using this particular library, most likely the result of various searches for webserver examples. Anyway, seems fairly easy to use. - You'll need to download this and place in your libraries folder.
+<li>ESPAsyncTCP - https://github.com/me-no-dev/ESPAsyncTCP the webserver above also needed this. You'll need to download this.
+<li>FastLED - https://github.com/FastLED/FastLED - I think you can add the library via. the libraries manager.
+<li>Artnet Sender/Receiver - https://github.com/hideakitai/ArtNet - I think you can add the library via. the libraries manager.
+</ul>
 
-<b>Built in effects<b>
+<h3>Built in effects</h3>
 
-McLighting, and some from tweaking4all.com
-https://www.tweaking4all.com/hardware/arduino/adruino-led-strip-effects/
-https://www.tweaking4all.com/forums/topic/led-matrix-with-ws2812b-led-stripes-project/
+<ul>
+    <li>McLighting, and some from tweaking4all.com
+        <ul>
+<li>https://www.tweaking4all.com/hardware/arduino/adruino-led-strip-effects/
+<li>https://www.tweaking4all.com/forums/topic/led-matrix-with-ws2812b-led-stripes-project/
+        </ul>
+</ul>
 
 
 <h2>Current Issues</h2>
