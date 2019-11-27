@@ -23,14 +23,36 @@ way of doing things, so that's where you come in - feel free to contribute addit
 
 <h2>Installation Instructions</h2>
 
-To be written.
+Take a copy of the ZIP file from this github and extract it into your Arduino sketch folder. You'll have the folder with
+the various .ino files in it as well as a data folder.
+
+You may optionally need to install the tool for uploading Sketch data - find instructions here:
+    https://github.com/esp8266/arduino-esp8266fs-plugin
+
+Open the main sketch (currently called XXXXX). If you've installed the above tool ok, from the tools menu you'll have
+the option to upload the sketch data - this is the web interface and config file.
+
+You may need to make a few changes in the settings.h file, there are comments in there to help you. Most likely you will
+only need to change DATA_PIN and/or CLOCK_PIN - I couldn't find a way of changing these on the fly - maybe someone else will
+know how?
+
+Compile and upload your sketch in the usual way.
+
+<h3>data folder</h3>
+The data folder contains the html, css and js files which make up the web interface. You will also find there a config
+file in json format. It is not necessary to edit for your own needs but you can if you wish - the web interface will
+update the config when you make changes in any event.
+
+You will need to initially upload the sketch data folder with the Sketch Data Upload tool - don't forget to allocate
+some SPIFF storage on your ESP8266.
 
 <h2>Sources</h2>
 
-ESPAsyncWebserver - https://github.com/me-no-dev/ESPAsyncWebServer I don't recall the reason I opted for using this particular
+ESPAsyncWebserver - https://github.com/me-no-dev/ESPAsyncWebServer I don't recall the reason I opted for using this particular. You'll need to download this and place in your libraries folder.
   library, most likely the result of various searches for webserver examples. Anyway, seems fairly easy to use.
-ESPAsyncTCP - https://github.com/me-no-dev/ESPAsyncTCP the webserver above also needed this.
-
+ESPAsyncTCP - https://github.com/me-no-dev/ESPAsyncTCP the webserver above also needed this. You'll need to download this.
+FastLED - https://github.com/FastLED/FastLED - I think you can add the library via. the libraries manager.
+Artnet Sender/Receiver - https://github.com/hideakitai/ArtNet - I think you can add the library via. the libraries manager.
 
 <b>Built in effects<b>
 
