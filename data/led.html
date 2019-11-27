@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>ATP ArtNet - %NODENAME% - LED/DMX Configuration</title>
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+  </head>
+  <body class="nice-spacing">
+<form action="/save.html" method="GET">
+<div class="container-fluid card">
+	<div class="row">
+		<div class="col-xs-12">
+			<h1 class="text-center">
+				ATP ArtNet - %NODENAME% - LED/DMX Configuration
+			</h1>
+			<p>
+				On this page you can configure which type of RGB Pixels you have, the number of nodes, & the DMX universe.
+			</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 mx-auto">
+			<button type="button" class="btn btn-lg btn-success forcewidth" onClick="window.location.href='/';">
+				Main Menu
+			</button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 mx-auto">
+			<div class="card text-white bg-primary mx-auto">
+				<h2 class="card-header">
+					LED/DMX
+				</h2>
+				<div class="card-body">
+					<div class="container-fluid card">
+						<div class="row">
+							<div class="col-xs-6">
+								 <label>LED Type</label><br/>					
+								 <label>Universe Number</label><br/>
+								 <label>Number of Nodes</label><br/>	
+								 <label>Channels</label>			 
+							</div>
+							<div class="col-xs-6">
+										<select name="curtype" class="success">
+										<option value="0" %selectedled[0]%>WS2801 using clock pin</option>
+										<option value="1" %selectedled[1]%>WS2811 data pin only</option>
+									</select>
+									<br/>
+								 <input type="text" value="%CURRENTUNIVERSE%" name="curuniverse" /><br/>
+								 <input type="text" value="%CURRENTNODES%" name="curnodes" /><br/>
+								 <input type="text" disabled value="%CURRENTCHANNELS% (calculated)" name="curchans" />
+							</div>
+						</div>
+				  </div>				
+				</div>
+				
+				<div class="card-footer">
+					<p>Feel free to edit the settings.</p>
+				</div>
+			</div>
+		</div>
+</div>
+<div class="row">
+		<div class="col-xs-12 mx-auto">
+		<br/>
+			<button type="submit" class="btn btn-lg btn-success forcewidth">
+				Apply Changes
+			</button>
+		</div>
+</div>
+</div>
+</div>
+</form>
+    <script src="jquery.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <script src="scripts.js"></script>
+  </body>
+</html>

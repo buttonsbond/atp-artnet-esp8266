@@ -1,0 +1,8 @@
+.card-header, .card-footer { text-align:center; }
+.forcewidth { width: 70vw; margin-bottom: 1vh; border: 1px solid black;}
+.nice-spacing { margin-left: 10%; margin-right: 10%;}
+.card { background-color: silver; padding: 1vh; margin-top: 1vh;}
+p { padding-left: 1vh; padding-right: 1vh;}
+select, input,label { margin-bottom: 3px; min-height: 30px; margin-top: 3px; margin-left: 3px; margin-right:3px;}
+input {background-color: lightblue; border: 0px;}
+.btn-lg { font-size: 4vh; }

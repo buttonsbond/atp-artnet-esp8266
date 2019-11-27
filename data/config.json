@@ -1,0 +1,17 @@
+{
+  "hostname": "artnet-1",
+  "ssid": "NETGEAR",
+  "psk": "aa11bb22cc",
+  "mqtt": "192.168.1.131",
+  "ledtype": "0",
+  "datapin": "5",
+  "clockpin": "6",
+  "autoeffects": "0",
+  "randomeffects": "0",
+  "selectedeffectno": "1",
+  "effectselected": "0",
+  "brightness": "96",
+  "fps": "240",
+  "numleds": "100",
+  "universe": "1"
+}

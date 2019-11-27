@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>ATP ArtNet - %NODENAME%</title>
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+  </head>
+<body class="nice-spacing">
+<form action="/save.html" method="GET">
+    <div class="container-fluid card">
+	<div class="row">
+		<div class="col-xs-12">
+			<h1 class="text-center">
+				ATP ArtNet - %NODENAME%
+			</h1>
+			<p>
+				Welcome to web configuration of your Artnet/DMX LED controller. When configured along with a sequencing program such as Xlights and the XScheduler, the controller will listen for Artnet/DMX packets and operate the lights. You can also optionally just have the lights play one or more of the preconfigured effects.
+			</p>
+			<p class="alert alert-info">Note that data pin and clock pin are currently hard coded, you need to change this in settings.h.</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 mx-auto">
+			<button type="button" class="btn btn-lg btn-success forcewidth" onClick="window.location.href='/led.html';">
+				LED/DMX
+			</button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 mx-auto">
+			<button type="button" class="btn btn-lg btn-success forcewidth" onClick="window.location.href='/builtin.html';">
+				Built In
+			</button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 mx-auto">
+			<button type="button" class="btn btn-lg btn-success forcewidth" onClick="window.location.href='/network.html';">
+				Network
+			</button>
+		</div>
+	</div>
+<div class="row">
+		<div class="col-xs-12 mx-auto">
+			<div class="card bg-success mx-auto">
+				<h2 class="card-header">
+					Node Settings
+				</h2>
+				<div class="card-body">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-xs-6">
+								 <p>WiFi Network</p>
+								 <p>IP Address</p>	
+								 <p>Data Pin</p>
+								 <p>Clock Pin</p>
+								 <p>Hostname</p>	 
+							</div>
+							<div class="col-xs-6">
+								 <p>%CURRENTWIFI%</p>
+								 <p>%CURRENTIP%</p>
+								 <p>%dp%</p>
+								 <p>%cp%</p>
+								 <p><input type="text" value="%NODENAME%" name="NODENAME" /></p>
+							</div>
+						</div>
+				  </div>				
+				</div>
+				<div class="card-footer">
+					<p>Feel free to edit the settings.</p>
+				</div>
+			</div>
+</div>
+</div>
+
+	<div class="row">
+		<div class="col-xs-12 mx-auto">
+			<br/>
+			<button type="submit" class="btn btn-lg btn-success forcewidth" >
+				Apply Changes
+			</button>
+			<br/>
+			<button type="button" class="btn btn-lg btn-success forcewidth" onClick="window.location.href='/reboot.html';">
+				Reboot
+			</button>
+		</div>
+	</div>
+
+</form>
+
+    <script src="jquery.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <script src="scripts.js"></script>
+  </body>
+</html>

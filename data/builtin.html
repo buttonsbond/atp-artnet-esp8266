@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>ATP ArtNet - %NODENAME% - Builtin Effects Selection</title>
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+  </head>
+  <body class="nice-spacing">
+<form action="/save.html" method="GET">
+    <div class="container-fluid card">
+	<div class="row">
+		<div class="col-xs-12">
+			<h1 class="text-center">
+				ATP ArtNet - %NODENAME% - Builtin Effects Selection
+			</h1>
+			<p>
+				On this page you can select one of the builtin LED effects and also set the option to cycle effects on boot. When the controller receives DMX/ArtNet packets the effects will stop!
+			</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 mx-auto">
+			<button type="button" class="btn btn-lg btn-success forcewidth" onClick="window.location.href='/';">
+				Main Menu
+			</button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 mx-auto">
+			<div class="card text-white bg-primary mx-auto">
+				<h2 class="card-header">
+					LED/DMX
+				</h2>
+				
+				<div class="card-body">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-xs-6">
+								 <label>List of Effects</label><br/>	 
+								 <label>Effects on Startup</label><br/>	 
+								 <label>Cycle Effects</label>
+							</div>
+							<div class="col-xs-6">
+										<select name="effect" class="success">
+										<option value="0" %selected[0]%>Rainbow</option>
+										<option value="1" %selected[1]%>Rainbow with Glitter</option>
+										<option value="2" %selected[2]%>Confetti</option>
+										<option value="3" %selected[3]%>Sinelon</option>
+										<option value="4" %selected[4]%>BPM</option>
+										<option value="5" %selected[5]%>Juggle</option>
+										<option value="6" %selected[6]%>Running Lights Red</option>
+										<option value="7" %selected[7]%>Running Lights White</option>
+										<option value="8" %selected[8]%>Running Lights Blue</option>									
+										<option value="9" %selected[9]%>New KITT</option>
+										<option value="10" %selected[10]%>Theatre Chase Rainbow</option>
+									</select>
+									<br/>
+									<select name="startupeffects" class="success">
+									<option value="0" %startupeffects[0]%>Off</option>
+									<option value="1" %startupeffects[1]%>On</option>
+									</select>
+								   <select name="cycleeffects" class="success">
+									<option value="0" %cycleeffects[0]%>Off - single selected effect</option>
+									<option value="1" %cycleeffects[1]%>On - cycle through effects</option>
+									</select>
+ 
+</div>
+							</div>
+						</div>
+				  </div>				
+				</div>
+				<div class="card-footer">
+					<p>Feel free to edit the settings.</p>
+				</div>
+			</div>
+	
+		</div>
+		
+		<div class="row">
+		<div class="col-xs-12 mx-auto">
+		<br/>
+			<button type="submit" class="btn btn-lg btn-success forcewidth" >
+				Apply Changes
+			</button>
+		</div>
+		</div>
+		
+	</div>
+</div>
+
+</form>
+
+
+
+    <script src="jquery.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <script src="scripts.js"></script>
+<!--    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script> -->
+  </body>
+</html>
