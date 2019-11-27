@@ -27,7 +27,10 @@ To be written.
 
 <h2>Sources</h2>
 
-ESPAsyncWebserver
+ESPAsyncWebserver - https://github.com/me-no-dev/ESPAsyncWebServer I don't recall the reason I opted for using this particular
+  library, most likely the result of various searches for webserver examples. Anyway, seems fairly easy to use.
+ESPAsyncTCP - https://github.com/me-no-dev/ESPAsyncTCP the webserver above also needed this.
+
 
 <b>Built in effects<b>
 
