@@ -6,11 +6,11 @@
 void savesettings() {
   Serial.println("attempting save...");
   saveConfiguration();
-  delay(2000);
+  delay(pause);
   }
 
 String processor(const String& var){
-  Serial.println(var);  
+//Serial.println(var);  
 if (var == "CURRENTIP") {
       return (IPtoString(WiFi.localIP()));
       }
@@ -70,16 +70,21 @@ if (var == "selected[9]") {
 if (var == "selected[10]") {
       return selected[10];
       }
-if (var == "checkedstartup") {
-      return String(startupeffects());
-}
+//if (var == "startupeffects") {
+//      return String(startupeffects());
+//}
 if (var == "dp") { return String(DATA_PIN);  } // return dp 
 if (var == "cp") { return String(CLOCK_PIN); } // return cp 
 
 }
 
-String startupeffects() {
-  if (autoeffects == -1) { return "checked"; } else { return ""; }
+//String startupeffects() {
+//  if (autoeffects == 1) { return "checked"; } else { return ""; }
+//}
+String redirect() {
+  String rd = "http://";
+  String rd2 = ".local/";
+  return (rd + String(HOSTNAME) + rd2);
 }
 
 String IPtoString(const IPAddress& address){
@@ -123,9 +128,9 @@ void websetup(){
   server.on("/reboot.html", HTTP_GET, [](AsyncWebServerRequest *request){
     //call save-before-reboot;
     //request->send(SPIFFS, "/reboot.html", String(), false, processor);
-    request->redirect("/");
-    delay(3000);   
-    ESP.restart();
+    request->redirect(redirect());
+    delay(pause);   
+    reboot();
   });  
   
   server.on("/style.css", HTTP_GET, [](AsyncWebServerRequest *request){
@@ -166,18 +171,26 @@ void websetup(){
          if (request->hasParam("effect"))
             {
                 Serial.printf("Starting effect %s",request->getParam("effect")->value().c_str());
+                Serial.println("");
                 selectedeffectno = request->getParam("effect")->value().toInt();
                 //effectselected=1;
                 // code to start the effect
             }
          // changing the pixel string type
          if (request->hasParam("curtype")) { ledtype = request->getParam("curtype")->value().toInt(); }
+         // startupeffects can be changed from on or off 1 or 0 to determine if on startup
+         // either the chosen single effect is started or cycling through all builtin effects
          if (request->hasParam("startupeffects"))
             {
               // see what value we have for startup effects on or null
-              String s = String(request->getParam("startupeffects")->value());
-              if (s == "on") { autoeffects=1; } else { autoeffects=0; }
+              int s = request->getParam("startupeffects")->value().toInt();
+              if (s == 1) { autoeffects=1; } else { autoeffects=0; }
             }
+         // cater for changing value of cycling effects on startup or the one selected effect
+         if (request->hasParam("cycleeffects")) {
+              int s = request->getParam("cycleeffects")->value().toInt();
+              if (s == 1) { randomeffects = 1; } else { randomeffects=0; }
+         }
          if (request->hasParam("curuniverse"))
             {
                 myuniverse = request->getParam("curuniverse")->value().toInt();
@@ -205,21 +218,19 @@ void websetup(){
                 //myuniverse = request->getParam("curuniverse", true)->value();
           // do any other saving - ie making changes permanent
         //request->send(SPIFFS, "/index.html", "text/html");
-         savesettings();
+        savesettings();
           //ESP.restart();
-        request->redirect("/");
+        delay(pause);
+    request->redirect(redirect());
+        delay(pause);
+        reboot();
         //delay(3000);
         //Serial.begin(57600); // i think I read that reini serial will restart the sketch?
           //request->send(SPIFFS, "/index.html", String(), false, processor);
  
           
       });
-// process play effect
-     server.on("/play.html", HTTP_GET, [](AsyncWebServerRequest *request){
-        Serial.println("new play setting selected...");
-        request->send(200, "text/plain", "playing ....");
-     });
- 
+
   server.begin();
 }
  

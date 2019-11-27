@@ -54,7 +54,12 @@ void callback(uint8_t* data, uint16_t size)
     Serial.println("callback...");
 }
 
-
+void reboot() {
+  // seems like resetting serial will bring about a restart
+  Serial.begin(57600);
+  delay(pause);
+  Serial.println("Controller restarted.");
+}
 void setup() {
   // setup serial debug port
   Serial.begin(57600);
@@ -95,11 +100,14 @@ while (WiFi.status() != WL_CONNECTED) { Serial.print("."); delay(500); }
   MDNS.update();
   Serial.println("mDNS responder started");
   otasetup();
+  Serial.print("The ledtype is "); Serial.println(ledtype);
   switch (ledtype) {
     case 0: // ws2801 using clock pin
+      Serial.println("WS2801 string in use (with clock).");
       FastLED.addLeds<WS2801,DATA_PIN,CLOCK_PIN,RGB>(leds, numLeds);
       break;
     case 1: // ws2811 using data pin only
+      Serial.println("WS2811 string in use (no clock).");
       FastLED.addLeds<WS2811,DATA_PIN,RGB>(leds, numLeds);
       break;
     default:
@@ -119,7 +127,10 @@ while (WiFi.status() != WL_CONNECTED) { Serial.print("."); delay(500); }
 
   
   artnet.subscribe(myuniverse, [&](uint8_t* data, uint16_t size) {
-
+  // using timera and timeb to see how long we are without a packet
+  // if it is a long time and autoeffects are enabled we will reinstate
+  // the autoeffects
+  timera = millis();
 // sanity check data - if its exactly the same drop the frame
 for (int check=0; check<numberOfChannels; ++check) {
   mychecksum=data[check]+mychecksum;
@@ -139,7 +150,7 @@ if (lastchecksum != mychecksum) {
    {
     leds[lamp] = CRGB(data[lamp * 3],data[lamp * 3 +1], data[lamp * 3 +2]);
    }
-   Serial.println(mychecksum); // I used this to debug if it was a new packet
+   //Serial.println(mychecksum); // I used this to debug if it was a new packet
    FastLED.show();
 }
 
@@ -178,7 +189,14 @@ dns.processNextRequest();
 ArduinoOTA.handle();
   // put your main code here, to run repeatedly:
 artnet.parse(); // check if artnet packet has come and execute callback
-
+timerb = millis();
+if (((timerb - timera) > 10000) && ((timerb - timera) < 12000)) {
+  // if we have been processing Artnet/DMX and nothing for 10 seconds
+  // reload the config to reinstate autoeffects if they are turned on
+  loadConfig();
+  // delay long enough so we don't get multiple reloads of the config
+  delay(pause);
+}
  if (autoeffects == 1 && randomeffects == 1) {
  // Call the current pattern function once, updating the 'leds' array
   gPatterns[gCurrentPatternNumber]();
@@ -198,7 +216,7 @@ artnet.parse(); // check if artnet packet has come and execute callback
   EVERY_N_MILLISECONDS( 5 ) { artnet.parse(); }
  }
 
- if (effectselected == 1 && randomeffects !=1) {
+ if (autoeffects == 1 && randomeffects !=1) {
  // Call the current pattern function once, updating the 'leds' array
   gPatterns[selectedeffectno]();
 
@@ -208,7 +226,7 @@ artnet.parse(); // check if artnet packet has come and execute callback
   FastLED.delay(1000/FRAMES_PER_SECOND); 
 
   // do some periodic updates
-  if (autoeffects != -1) {
+  if (autoeffects != 0) {
   EVERY_N_MILLISECONDS( 20 ) { gHue++; } // slowly cycle the "base color" through the rainbow
   }
   }

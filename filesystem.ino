@@ -21,6 +21,9 @@ Config config;
 void saveConfiguration() {
   // Delete existing file, otherwise the configuration is appended to the file
   //SD.remove(filename);
+Serial.print("Autoeffects: "); Serial.println(autoeffects);
+Serial.print("Randomeffects: "); Serial.println(randomeffects);
+Serial.print("Single Effect: "); Serial.println(selectedeffectno);
 
   // Open file for writing
   File file = SPIFFS.open("/config.json", "w");
@@ -114,6 +117,7 @@ bool loadConfig() {
 //  ssid = json["ssid"];
 //  char* password =  json["psk"];
 //  char* mqtt = json["mqtt"];
+  ledtype = json["ledtype"];
   int dp = json["datapin"];
   int cp = json["clockpin"];
   autoeffects = json["autoeffects"];
