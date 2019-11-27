@@ -66,6 +66,10 @@ some SPIFF storage on your ESP8266.
         </ul>
 </ul>
 
+<h2>Works on...</h2>
+<ul>
+    <li>Node MCU d1 Mini 4Mb (ESP8266 MOD) - that's what I've got. I'll add more if people tell me!
+</ul>
 <h2>Current Issues</h2>
 
 Sometimes when settings are changed - the ESP8266 dumps its stack - not sure exactly why. I thought it was to do
