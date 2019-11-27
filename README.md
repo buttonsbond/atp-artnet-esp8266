@@ -74,7 +74,7 @@ some SPIFF storage on your ESP8266.
 Sometimes when settings are changed - the ESP8266 dumps its stack - not sure exactly why. I thought it was to do
 with incomplete web requests so I added in a few delays before restarting the sketch after a save. If anyone has a fix?
 
-<h2>To be done</h2>
+<h2>To be done - in no particular order</h2>
 <ul>
     <li>Add MQTT support so can be used with Home Assistant and Node Red
     <li>Fix bugs
@@ -82,4 +82,5 @@ with incomplete web requests so I added in a few delays before restarting the sk
     <li>Maybe add some more comments
     <li>More built in effects
     <li>Add ability to save a Artnet/DMX sequence and load to play - not sure if this will be feasible depending on what I can get the file size down to
+    <li>Finish the web interface - a few rough edges still!
 </ul>
