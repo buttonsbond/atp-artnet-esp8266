@@ -132,7 +132,8 @@ void websetup(){
     //call save-before-reboot;
     //request->send(SPIFFS, "/reboot.html", String(), false, processor);
     request->redirect(redirect());
-    delay(pause);   
+    delay(pause);
+    ESP.reset();   
     reboot();
   });  
   server.on("/resetwifi.html", HTTP_GET, [](AsyncWebServerRequest *request){

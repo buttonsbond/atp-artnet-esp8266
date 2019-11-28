@@ -61,6 +61,7 @@ void reboot() {
   // seems like resetting serial will bring about a restart
   Serial.begin(57600);
   delay(pause);
+  lightsoff();
   Serial.println("Controller restarted.");
 }
 void setup() {
@@ -116,7 +117,7 @@ void setup() {
   Serial.print("Listening for Artnet/DMX on universe "); Serial.println(myuniverse);
 
   artnet.begin(); // waiting for Art-Net in default port
-  for (int lightoff=0; lightoff < NUM_LEDS; ++lightoff) { leds[lightoff] = CRGB(0,0,0); }
+  lightsoff();
   FastLED.show();
 
 
@@ -187,10 +188,11 @@ ArduinoOTA.handle();
   // put your main code here, to run repeatedly:
 artnet.parse(); // check if artnet packet has come and execute callback
 timerb = millis();
-if (((timerb - timera) > 10000) && ((timerb - timera) < 12000)) {
+if (((timerb - timera) > 10000) && ((timerb - timera) < 15000)) {
   // if we have been processing Artnet/DMX and nothing for 10 seconds
   // reload the config to reinstate autoeffects if they are turned on
   loadConfig();
+  lightsoff();
   // delay long enough so we don't get multiple reloads of the config
   delay(pause);
 }

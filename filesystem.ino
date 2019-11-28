@@ -15,7 +15,15 @@ struct Config {
   int numleds;
   int universe;
 };
+struct Version {
+  char ver;
+  char author;
+  char company;
+  char website;
+  char project;
+};
 Config config;
+Version ver;
 
 // Saves the configuration to a file
 void saveConfiguration() {
@@ -82,7 +90,39 @@ Serial.print("Single Effect: "); Serial.println(selectedeffectno);
   resetdropdowns();
 }
 
+bool loadVer() {
+  File versionFile = SPIFFS.open("/version.json","r");
+  if (!versionFile) {
+    Serial.println("Version file not found.");
+    return false;
+  }
+  size_t size = versionFile.size();
+  if (size > 512) {
+    Serial.println("version file is too large");
+    return false;
+  }
 
+  // allocate buffer to store contents of the file
+  std::unique_ptr<char[]> buf(new char[size]);
+  versionFile.readBytes(buf.get(), size);
+  Serial.println(buf.get());
+  StaticJsonBuffer<512> jsonBuffer;
+  JsonObject& json = jsonBuffer.parseObject(buf.get());
+
+  if (!json.success()) {
+    Serial.println("Failed to parse version file");
+    return false;
+  }
+
+ver.ver = json["version"];
+ver.author = json["author"];
+ver.company = json["company"];
+ver.website = json["website"];
+ver.project = json["project"];
+
+return true;
+  
+}
 bool loadConfig() {
   File configFile = SPIFFS.open("/config.json", "r");
   if (!configFile) {

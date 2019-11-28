@@ -33,6 +33,7 @@ String scanwifi() {
 
 void resetwifi() {
     AsyncWiFiManager wifiManager(&serverap,&dns);
+    wifiManager.autoConnect();
     Serial.println("WiFi Config Portal Requested");
     Serial.println("You may need to connect to the controllers access point at http://192.168.4.1 to change your WiFi");
     //wifiManager.resetSettings();

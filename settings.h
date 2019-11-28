@@ -64,9 +64,9 @@ unsigned long timerb = millis();
 
 
 //const char* ssid = "Telfy_3316";
-char ssid[] = "Telfy_3316";
+char ssid[] = "Mikrotik";
 //const char* password =  "jonesxa1";
-char password[] = "jonesxa1";
+char password[] = "aa11bb22cc";
 
 
 #define DBG_OUTPUT_PORT Serial  // Set debug output port

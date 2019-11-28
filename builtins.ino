@@ -1,3 +1,6 @@
+void lightsoff() {
+for (int lightoff=0; lightoff < NUM_LEDS; ++lightoff) { leds[lightoff] = CRGB(0,0,0); }
+}
 // some of the lighting effects here are from McLighting, and some from tweaking4all.com
 
 void theaterChaseRainbowStub() { theaterChaseRainbow(100); }
