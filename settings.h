@@ -8,6 +8,9 @@ int cp = 6;
 #define DATA_PIN 5   // WS2801 Clock pin D5 .  gpio 12
 #define BUILTIN_LED 2
 
+// select which pin will trigger the configuration portal when set to LOW
+#define TRIGGER_PIN 0
+
 #define ENABLE_OTA      // comment out if you don't want OTA updates
 int OTAport = 8266;
 //const char* OTAPassword = "artnet";

@@ -3,6 +3,7 @@
  * MQTT, and ARTnet for control with XLights
  * All Tech Plus, 2019
  */
+ 
 #include "FS.h"
 #include <ArduinoJson.h>
 #include <ESP8266WiFi.h>
@@ -22,6 +23,7 @@ CRGB leds[numLeds];
 
 #include "ESPAsyncTCP.h"
 #include "ESPAsyncWebServer.h"
+#include <ESPAsyncWiFiManager.h>
 
 #ifdef ENABLE_OTA
   #include <WiFiUdp.h>
@@ -44,6 +46,7 @@ CRGB leds[numLeds];
 #endif
 
 AsyncWebServer server(80);
+AsyncWebServer serverap(8080);
 DNSServer dns;
 
 ArtnetReceiver artnet;
@@ -66,18 +69,12 @@ void setup() {
   Serial.println("Booting...");
   checkConfig();
   // set built in LED which will flash when receiving artnet packets 
-  pinMode(BUILTIN_LED,OUTPUT);  
-wifi_station_set_hostname(const_cast<char*>(HOSTNAME));
-
-WiFi.begin(ssid, password);
-while (WiFi.status() != WL_CONNECTED) { Serial.print("."); delay(500); }
-  Serial.print("WiFi connected, IP = "); Serial.println(WiFi.localIP());
-
-//   while (WiFi.waitForConnectResult() != WL_CONNECTED) {
- //   Serial.println("Connection Failed! Rebooting...");
-//    delay(5000);
-//    ESP.restart();
- // }
+  pinMode(BUILTIN_LED,OUTPUT); 
+  // setup pin for ondemandwifi
+  ondemandsetup();
+  // setup the wifi or start ondemandap
+  checkwifi(); 
+  wifi_station_set_hostname(const_cast<char*>(HOSTNAME));
   websetup();
 
   DBG_OUTPUT_PORT.print("Open http://");

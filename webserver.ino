@@ -106,7 +106,10 @@ void websetup(){
   server.on("/rand", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send(200, "text/plain", String(random(1000)));
   });
-
+  server.on("/scan", HTTP_GET, [](AsyncWebServerRequest *request){
+    String json = scanwifi();
+    request->send(200, "application/json", json);
+  });
   // Route for root / web page
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send(SPIFFS, "/index.html", String(), false, processor);
@@ -132,6 +135,13 @@ void websetup(){
     delay(pause);   
     reboot();
   });  
+  server.on("/resetwifi.html", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->redirect(redirect());
+    delay(pause);
+    resetwifi();   
+    //reboot();
+  });  
+
   
   server.on("/style.css", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send(SPIFFS, "/style.css", "text/css");
