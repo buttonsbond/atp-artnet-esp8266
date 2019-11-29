@@ -15,7 +15,7 @@ struct Config {
   int numleds;
   int universe;
 };
-struct Version {
+struct myversion {
   char ver;
   char author;
   char company;
@@ -23,7 +23,7 @@ struct Version {
   char project;
 };
 Config config;
-Version ver;
+myversion vr;
 
 // Saves the configuration to a file
 void saveConfiguration() {
@@ -90,6 +90,13 @@ Serial.print("Single Effect: "); Serial.println(selectedeffectno);
   resetdropdowns();
 }
 
+void getversion() {
+   if (!loadVer()) {
+      Serial.println("Failed to load version info");
+    } else {
+      Serial.println("Version info loaded");
+    }
+}
 bool loadVer() {
   File versionFile = SPIFFS.open("/version.json","r");
   if (!versionFile) {
@@ -106,19 +113,25 @@ bool loadVer() {
   std::unique_ptr<char[]> buf(new char[size]);
   versionFile.readBytes(buf.get(), size);
   Serial.println(buf.get());
-  StaticJsonBuffer<512> jsonBuffer;
-  JsonObject& json = jsonBuffer.parseObject(buf.get());
+  StaticJsonBuffer<512> jsonBufferv;
+  JsonObject& vjson = jsonBufferv.parseObject(buf.get());
 
-  if (!json.success()) {
+  if (!vjson.success()) {
     Serial.println("Failed to parse version file");
     return false;
   }
-
-ver.ver = json["version"];
-ver.author = json["author"];
-ver.company = json["company"];
-ver.website = json["website"];
-ver.project = json["project"];
+vr.ver = vjson["version"];
+//vr.ver = vjson["version"];
+//Serial.println(String(vjson["version"]));
+//vr.author = vjson["author"];
+//vr.company = vjson["company"];
+//vr.website = vjson["website"];
+//vr.project = vjson["project"];
+Serial.print("Version: "); Serial.println(vr.ver);
+Serial.print("Author : "); Serial.println(vr.author);
+Serial.print("Company: "); Serial.println(vr.company);
+Serial.print("Website: "); Serial.println(vr.website);
+Serial.print("Project: "); Serial.println(vr.project);
 
 return true;
   

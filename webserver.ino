@@ -75,6 +75,11 @@ if (var == "selected[10]") {
 //}
 if (var == "dp") { return String(DATA_PIN);  } // return dp 
 if (var == "cp") { return String(CLOCK_PIN); } // return cp 
+if (var == "ver.ver") { return String(vr.ver); }
+if (var == "ver.author") { return String(vr.author); }
+if (var == "ver.company") { return String(vr.company); }
+if (var == "ver.website") { return String(vr.website); }
+if (var == "ver.project") { return String(vr.project); }
 
 }
 

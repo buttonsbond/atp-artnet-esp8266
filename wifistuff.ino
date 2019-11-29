@@ -69,7 +69,7 @@ void checkwifi() {
     //WiFi.mode(WIFI_STA);
     
    
-
+    Serial.print("Attempting to connect to "); Serial.print(ssid); Serial.print(" with password "); Serial.println(password);
     WiFi.begin(ssid, password);
       while (WiFi.status() != WL_CONNECTED) { Serial.print("."); delay(500); }
       Serial.print("WiFi connected, IP = "); Serial.println(WiFi.localIP());

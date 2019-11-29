@@ -69,6 +69,7 @@ void setup() {
   Serial.begin(57600);
   Serial.println("Booting...");
   checkConfig();
+  getversion();
   // set built in LED which will flash when receiving artnet packets 
   pinMode(BUILTIN_LED,OUTPUT); 
   // setup pin for ondemandwifi
