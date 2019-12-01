@@ -192,8 +192,10 @@ timerb = millis();
 if (((timerb - timera) > 10000) && ((timerb - timera) < 15000)) {
   // if we have been processing Artnet/DMX and nothing for 10 seconds
   // reload the config to reinstate autoeffects if they are turned on
+  Serial.println("No more Artnet packets.");
   loadConfig();
   lightsoff();
+  digitalWrite(BUILTIN_LED, true);
   // delay long enough so we don't get multiple reloads of the config
   delay(pause);
 }

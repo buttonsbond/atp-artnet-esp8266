@@ -88,9 +88,9 @@ if (var == "ver.project") { return String(vr.project); }
 //}
 String redirect() {
   String rd = "http://";
-  String rd2 = ".local/";
-  return (rd + String(HOSTNAME) + rd2);
-}
+  //String rd2 = ".local/";
+  return (rd + IPtoString(WiFi.localIP())); 
+} 
 
 String IPtoString(const IPAddress& address){
   return String() + address[0] + "." + address[1] + "." + address[2] + "." + address[3];
