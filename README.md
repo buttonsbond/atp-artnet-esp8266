@@ -1,5 +1,6 @@
 # atp-artnet-esp8266
 <h1>All Tech Plus - Artnet NodeMCU Controller</h1>
+<p class="alert alert-warning">Please note you may have to hard code your ssid and pw for your WiFi for the time being. Though if the ESP8266 hasn't been connected before you should get WiFi manager the first time. I'll have this fixed soon - or rather programmed!</p>
 <h2>Description</h2>
 A sketch to allow a node MCU 4M with 1M SPIFFS to process Artnet/DMX packets from xLights Scheduler plus a few bonuses
 
@@ -77,6 +78,7 @@ with incomplete web requests so I added in a few delays before restarting the sk
 <h2>To be done - in no particular order</h2>
 <ul>
     <li>Add MQTT support so can be used with Home Assistant and Node Red
+    <li>Ability to change wifi
     <li>Fix bugs
     <li>Tidy up code a bit
     <li>Maybe add some more comments
