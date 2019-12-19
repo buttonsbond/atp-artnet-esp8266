@@ -27,7 +27,18 @@ String cycleeffects[2];
 #define FASTLED_ESP8266_NODEMCU_PIN_ORDER
 //define FASTLED_ESP8266_D1_PIN_ORDER
 
-#define ENABLE_MQTT
+#define ENABLE_MQTT true
+#ifdef ENABLE_MQTT
+  #define MQTT_MAX_PACKET_SIZE 512
+  #define MQTT_MAX_RECONNECT_TRIES 4
+  char MQTTHOST[20] = "ARTNET-DEFAULT"; 
+
+  int mqtt_reconnect_retries = 0;
+
+#endif
+
+
+
 
 // these defines are used for just running random animations when there's no show playing
 int BRIGHTNESS     =     96;

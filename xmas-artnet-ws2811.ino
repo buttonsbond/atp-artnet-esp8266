@@ -3,18 +3,26 @@
  * MQTT, and ARTnet for control with XLights
  * All Tech Plus, 2019
  */
+ struct myversion {
+  char ver;
+  char author;
+  char company;
+  char website;
+  char project;
+};
  
 #include "FS.h"
 #include <ArduinoJson.h>
 #include <ESP8266WiFi.h>
 #include <DNSServer.h>
 #include <WiFiClient.h>
-
+#include <PubSubClient.h>
 #include <ESP8266mDNS.h>
 
 #include <Artnet.h>
 #include <RingBuffer.h>
 
+#define FASTLED_INTERNAL // this disables the pragma messages during compile time
 #include <FastLED.h>
 FASTLED_USING_NAMESPACE
 #include "settings.h"
@@ -29,21 +37,10 @@ CRGB leds[numLeds];
   #include <WiFiUdp.h>
   #include <ArduinoOTA.h>
 #endif
-#ifdef ENABLE_MQTT
-  #include <PubSubClient.h>
-#endif
 
-// MQTT
-#ifdef ENABLE_MQTT
-  #include <PubSubClient.h>
-  #ifdef ENABLE_HOMEASSISTANT
-    #include <ArduinoJson.h>
-  #endif
-// setup device network name
 
-  WiFiClient espClient;
-  PubSubClient mqtt_client(espClient);
-#endif
+WiFiClient wClient;
+PubSubClient client(wClient); // was client
 
 AsyncWebServer server(80);
 AsyncWebServer serverap(8080);
@@ -59,9 +56,9 @@ void callback(uint8_t* data, uint16_t size)
 
 void reboot() {
   // seems like resetting serial will bring about a restart
+  lightsoff();
   Serial.begin(57600);
   delay(pause);
-  lightsoff();
   Serial.println("Controller restarted.");
 }
 void setup() {
@@ -78,6 +75,10 @@ void setup() {
   checkwifi(); 
   wifi_station_set_hostname(const_cast<char*>(HOSTNAME));
   websetup();
+  #ifdef ENABLE_MQTT
+  Serial.println("Init MQTT");
+  mqtt_setup();
+  #endif
 
   DBG_OUTPUT_PORT.print("Open http://");
   DBG_OUTPUT_PORT.print(WiFi.localIP());
@@ -113,8 +114,8 @@ void setup() {
       Serial.println("Oh dear I'm not sure what pixels you are using.");
       break;
   }
-  Serial.println("Setting up MQTT");
-  mqtt_client.setServer("192.168.1.131", 1883);
+  //Serial.println("Setting up MQTT");
+  //client.setServer("192.168.1.131", 1883);
   Serial.print("Listening for Artnet/DMX on universe "); Serial.println(myuniverse);
 
   artnet.begin(); // waiting for Art-Net in default port
@@ -167,18 +168,7 @@ uint8_t gHue = 0; // rotating "base color" used by many of the patterns
 
 
 void reconnect() {
-  // Loop until we're reconnected
-  while (!mqtt_client.connected()) {
-    Serial.print("Attempting MQTT connection...");
-    // Attempt to connect
-    if (mqtt_client.connect("artnet1", "artnet1", "artnet1")) {
-      Serial.println("MQQT connected");
-      // Once connected, publish an announcement...
-    } else {
-      // Wait 5 seconds before retrying
-      delay(5000);
-    }
-  }
+ 
 }
 
 
@@ -193,8 +183,8 @@ if (((timerb - timera) > 10000) && ((timerb - timera) < 15000)) {
   // if we have been processing Artnet/DMX and nothing for 10 seconds
   // reload the config to reinstate autoeffects if they are turned on
   Serial.println("No more Artnet packets.");
-  loadConfig();
   lightsoff();
+  loadConfig();
   digitalWrite(BUILTIN_LED, true);
   // delay long enough so we don't get multiple reloads of the config
   delay(pause);
@@ -232,6 +222,10 @@ if (((timerb - timera) > 10000) && ((timerb - timera) < 15000)) {
   EVERY_N_MILLISECONDS( 20 ) { gHue++; } // slowly cycle the "base color" through the rainbow
   }
   }
+ //while(client.connected()) {
+   // check mqtt
+   client.loop();
+   // }
 
 
 }

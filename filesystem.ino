@@ -15,13 +15,7 @@ struct Config {
   int numleds;
   int universe;
 };
-struct myversion {
-  char ver;
-  char author;
-  char company;
-  char website;
-  char project;
-};
+
 Config config;
 myversion vr;
 
