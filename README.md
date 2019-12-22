@@ -97,8 +97,8 @@ with incomplete web requests so I added in a few delays before restarting the sk
 
 <h2>To be done - in no particular order</h2>
 <ul>
-    <li>Add MQTT support so can be used with Home Assistant and Node Red
-    <li>Ability to change wifi
+    <li>Add MQTT support so can be used with Home Assistant and Node Red [PARTIALLY WORKING]
+    <li>Ability to change wifi [TO BE COMPLETED]
     <li>Fix bugs
     <li>Tidy up code a bit
     <li>Maybe add some more comments
