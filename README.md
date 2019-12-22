@@ -18,7 +18,26 @@ worked. I wasn't happy enough with that though, as I won't be running an xLight 
 select inbuilt effects just like I did with McLighting - so I've lifted a few effects from different sources to use as built
 in effects.
 
-I've added a web interface. The ability to change some of the settings, and will soon be adding in MQTT control as well.
+<h2>User interfaces</h2>
+<h3>It has a web interface!</h3>
+Just got to the IP address shown in either the serial console, or http://nodename.local if your machine is running Bonjour.
+The interface itself isn't terribly refined at the moment - it needs finishing and improving.
+<h3>MQTT</h3>
+More or less working MQTT, the topics are hostname/effect, hostname/startup, hostname/cycle and hostname/off.
+<ul>
+    <li>hostname/effect pass a number as payload corresponding to the effect number.</li>
+    <li>hostname/startup pass either 1 to set on, or 0 to set off.</li>
+    <li>hostname/cycle pass either 1 or 0.</li>
+    <li>hostname/off pass anything you like will turn off startup, and turn the lights off [not currently working]</li>
+</ul>
+<h3>Wemo</h3>
+You can now control with your Amazon Alexa. The device is known by its hostname. Commands are:
+<ul>
+    <li>Alexa, turn on hostname</li>
+    <li>Alexa, turn off hostname</li>
+    <li>Alexa, set hostname to X percent</li>
+</ul>
+Note that percentage values 1 to 15 are converted to the effect number.
 
 Now, this may not be coded super effeciently, I may have been wasteful with variable storage, there will always be a better
 way of doing things, so that's where you come in - feel free to contribute additions and improvements.
