@@ -14,14 +14,10 @@
         
         Serial.printf("[MAIN] Device #%d (%s) state: %s value: %d\n", device_id, device_name, state ? "ON" : "OFF", value);
 
-        
-          Serial.println("Received voice command.");
           if (!state) {
-            Serial.println("...turn off");
             autoeffects=0;
           }
           if (state) {
-            Serial.println("...turn on");
             autoeffects=1;
           }
           // percentage values to map to effectno
@@ -42,10 +38,10 @@
           if (value == 36) { selectedeffectno=13; }
           if (value == 39) { selectedeffectno=14; }
 
-          savesettings();  
-
-           if (!state) { lightsoff(); }
-
+          if (value == 100) { randomeffects=1; }
+          if (value == 99) { randomeffects=0;}         
+          savesettings(); 
+          if (!state) { lightsoff(); } 
     });
 
 }
