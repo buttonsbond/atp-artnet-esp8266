@@ -16,10 +16,9 @@
 
           if (!state) {
             autoeffects=0;
+            savesettings(); 
           }
-          if (state) {
-            autoeffects=1;
-          }
+
           // percentage values to map to effectno
           // there are currently 11 built in effects dec 2019 - I've catered here for another 4
           if (value == 4) { selectedeffectno=0; }
@@ -38,10 +37,15 @@
           if (value == 36) { selectedeffectno=13; }
           if (value == 39) { selectedeffectno=14; }
 
-          if (value == 100) { randomeffects=1; }
-          if (value == 99) { randomeffects=0;}         
-          savesettings(); 
+          if (value == 206) { randomeffects=1; savesettings();}    // 81 percent
+          if (value == 203) { randomeffects=0; savesettings();}    // 80 percent      
+
           if (!state) { lightsoff(); } 
+          if ((state) && (value > 250)) {
+            // percentages greater than 250 are basically on, off we don't want to turn on otherwise so we ignore
+            autoeffects=1;
+            savesettings();
+          }
     });
 
 }
