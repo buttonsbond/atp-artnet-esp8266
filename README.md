@@ -36,11 +36,11 @@ You can now control with your Amazon Alexa. The device is known by its hostname.
     <li>Alexa, turn on hostname</li>
     <li>Alexa, turn off hostname</li>
     <li>Alexa, set hostname to X percent</li>
-    <li>Alexa, set hostname to 100 percent</li>
-    <li>Alexa, set hostname to 99 percent</li>
+    <li>Alexa, set hostname to 81 percent</li>
+    <li>Alexa, set hostname to 80 percent</li>
 </ul>
 Note that percentage values 1 to 15 are converted to the effect number.
-100 percent will turn on the setting for cycling the built in effects, whilst 99 percent will set that to off.
+81 percent will turn on the setting for cycling the built in effects, whilst 80 percent will set that to off. [not working]
 
 Now, this may not be coded super effeciently, I may have been wasteful with variable storage, there will always be a better
 way of doing things, so that's where you come in - feel free to contribute additions and improvements.
