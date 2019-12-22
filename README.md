@@ -77,6 +77,7 @@ some SPIFF storage on your ESP8266.
 <li>ESPAsyncTCP - https://github.com/me-no-dev/ESPAsyncTCP the webserver above also needed this. You'll need to download this.
 <li>FastLED - https://github.com/FastLED/FastLED - I think you can add the library via. the libraries manager.
 <li>Artnet Sender/Receiver - https://github.com/hideakitai/ArtNet - I think you can add the library via. the libraries manager.
+<li>Fauxmo - Wemo emulation - https://bitbucket.org/xoseperez/fauxmoesp/src/master/ - you can add it via the libraries manager.
 </ul>
 
 <h3>Built in effects</h3>
