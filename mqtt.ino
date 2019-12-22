@@ -89,7 +89,7 @@ void mqttcallback(String topic, byte* payload, unsigned int length) {
   Serial.print("turn off topic received: ");
   autoeffects=0;
   savesettings();
-  lightsoff();
+  reboot();
   Serial.println(msg);
  }
 }

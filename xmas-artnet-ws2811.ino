@@ -18,6 +18,7 @@
 #include <WiFiClient.h>
 #include <PubSubClient.h>
 #include <ESP8266mDNS.h>
+#include <fauxmoESP.h>
 
 #include <Artnet.h>
 #include <RingBuffer.h>
@@ -41,6 +42,7 @@ CRGB leds[numLeds];
 
 WiFiClient wClient;
 PubSubClient client(wClient); // was client
+fauxmoESP fauxmo;
 
 AsyncWebServer server(80);
 AsyncWebServer serverap(8080);
@@ -78,6 +80,8 @@ void setup() {
   #ifdef ENABLE_MQTT
   Serial.println("Init MQTT");
   mqtt_setup();
+  Serial.println("Setting up wemo will use hostname as device name");
+  wemosetup();
   #endif
 
   DBG_OUTPUT_PORT.print("Open http://");
@@ -225,6 +229,7 @@ if (((timerb - timera) > 10000) && ((timerb - timera) < 15000)) {
  //while(client.connected()) {
    // check mqtt
    client.loop();
+   fauxmo.handle();
    // }
 
 

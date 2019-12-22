@@ -108,6 +108,18 @@ void websetup(){
 
 
   //dns.start(53, "*", WiFi.localIP());
+// These two callbacks are required for gen1 and gen3 compatibility
+// for wemo - lifted from example program
+    server.onRequestBody([](AsyncWebServerRequest *request, uint8_t *data, size_t len, size_t index, size_t total) {
+        if (fauxmo.process(request->client(), request->method() == HTTP_GET, request->url(), String((char *)data))) return;
+        // Handle any other body request here...
+    });
+    server.onNotFound([](AsyncWebServerRequest *request) {
+        String body = (request->hasParam("body", true)) ? request->getParam("body", true)->value() : String();
+        if (fauxmo.process(request->client(), request->method() == HTTP_GET, request->url(), body)) return;
+        // Handle not found request here...
+    });
+
  
   server.on("/rand", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send(200, "text/plain", String(random(1000)));
@@ -237,8 +249,8 @@ void websetup(){
         //request->send(SPIFFS, "/index.html", "text/html");
         savesettings();
           //ESP.restart();
+        request->redirect(redirect());
         delay(pause);
-    request->redirect(redirect());
         delay(pause);
         reboot();
         //delay(3000);
